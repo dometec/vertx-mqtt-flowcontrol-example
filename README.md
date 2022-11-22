@@ -22,7 +22,7 @@ In MQTT 5 each client can tell to the broken the max number of inflight messages
 
 ## VertX implementation
 
-The problem I found in VertX MQTT Client implementation is that acknowleged of the message is done by the library before pass the message to the application logic. So the application do not have the ability to mark the message as elaborated. In this way, MQTT message at QoS1 or QoS2 can be lost before they can be elaborated, for example for a crash of the client, since the broker has received the acks for those messages, the message, for it, are successful delivered.
+The problem I found in VertX MQTT Client implementation is that acknowledgment of the message is done by the library before passing the message to the application logic. So the application does not have the ability to mark the message as elaborated. In this way, MQTT messages at QoS1 or QoS2 can be lost before they can be elaborated, for example for a crash of the client, since the broker has received the acks for those messages, and for it, are successfully delivered.
 
 I extended the message handler of the VertX client and I give the opportunity to application logic to ack the message.
 
