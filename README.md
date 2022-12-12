@@ -78,10 +78,12 @@ $ docker run --rm --name=grafana --network host grafana/grafana:8.5.15
 $ docker run --rm --network host -e "DOCKER_VERNEMQ_ACCEPT_EULA=yes" -e "DOCKER_VERNEMQ_ALLOW_ANONYMOUS=on" -e "DOCKER_VERNEMQ_LISTENER__TCP__DEFAULT=0.0.0.0:1883" -e "DOCKER_VERNEMQ_MAX_ONLINE_MESSAGES=10000" -e "DOCKER_VERNEMQ_MAX_OFFLINE_MESSAGES=10000" --name vernemq1 vernemq/vernemq:1.12.6.1
 ```
 You can use the following command to see the active subscription on broker and see how many messages there are on the broker queue:
+
 ```
 $ docker exec -it vernemq1 vmq-admin session show --client_id --is_online --mountpoint --peer_host --peer_port --user --offline_messages  --online_messages  --clean_session
 ```
 At the end you can start this Verticle:
+
 ```
 $ mvn exec:java
 ```

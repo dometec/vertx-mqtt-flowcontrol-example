@@ -15,12 +15,6 @@ import io.vertx.mqtt.MqttClientOptions;
 
 public class MainVerticle extends AbstractVerticle {
 
-//	public static void main(String[] args) {
-//		VertxOptions vertxO =  new VertxOptions().setMetricsOptions(new MicrometerMetricsOptions()
-//				.setPrometheusOptions(new VertxPrometheusOptions().setEnabled(true)).setEnabled(true));
-//		System.out.println(vertxO.toJson());
-//	}
-
 	@Override
 	public void start(Promise<Void> startPromise) throws Exception {
 
@@ -38,11 +32,12 @@ public class MainVerticle extends AbstractVerticle {
 		MqttClientOptions options = new MqttClientOptions();
 		options.setCleanSession(false);
 		options.setClientId("2b5cf8d8-7d04-4516-8e9d-2ed7fb9a2eb0");
+		options.setAutoAck(false);
 		MqttClient client = MqttClient.create(vertx, options);
 
 		client.connect(1883, "localhost").andThen(ret -> {
 
-			client.publishHandlerManualAck(msg -> {
+			client.publishHandler(msg -> {
 
 				vertx.executeBlocking(promise -> {
 
